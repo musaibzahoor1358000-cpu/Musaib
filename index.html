@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Study Hub</title>
+<style>
+  body{margin:0;font-family:system-ui,sans-serif;background:#0f172a;color:#e2e8f0}
+  header{padding:14px 16px;font-size:20px;font-weight:700;background:#1e293b}
+  #tabs{display:flex;flex-wrap:wrap;gap:8px;padding:12px 16px}
+  button{border:0;border-radius:20px;padding:9px 14px;background:#334155;color:#e2e8f0;font-size:14px}
+  button.on{background:#2563eb}
+  #wrap{padding:0 16px 24px}
+  iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#000}
+  p{color:#94a3b8;font-size:13px}
+</style>
+</head>
+<body>
+<header>📚 Study Hub</header>
+<div id="tabs"></div>
+<div id="wrap"><div id="player"></div></div>
+<script>
+// EDIT THIS LIST. id = channel ID that starts with UC (24 characters).
+const CHANNELS = [
+  {name:"PW Alakh Pandey",   id:""},
+  {name:"Whiteboard Lectures",id:""},
+  {name:"Gohar Khan",        id:""},
+  {name:"Nihayat Farooq",    id:""},
+  {name:"Kashmiri Boy",      id:""},
+  {name:"KV Education",      id:""},
+  {name:"PW Emotion",        id:""}
+];
+const tabs=document.getElementById('tabs'),player=document.getElementById('player');
+CHANNELS.forEach((c,i)=>{
+  const b=document.createElement('button');b.textContent=c.name;
+  b.onclick=()=>{[...tabs.children].forEach(x=>x.classList.remove('on'));b.classList.add('on');show(c)};
+  tabs.appendChild(b);
+});
+function show(c){
+  if(!c.id.startsWith('UC')){player.innerHTML='<p>Channel ID not added yet for '+c.name+'.</p>';return}
+  const list='UU'+c.id.slice(2);
+  player.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/videoseries?list='+list+'" allowfullscreen></iframe><p>Use the playlist icon inside the player to pick a lecture.</p>';
+}
+</script>
+</body>
+</html>
